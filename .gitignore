@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Claude conversation logs
 claude-conversations/
+
+# Claude conversation logs
+.claude-conversations/
