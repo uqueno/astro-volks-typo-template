@@ -43,7 +43,7 @@ A striking Astro blog theme that explores the aesthetic tension between Bauhaus 
 ## 🚀 Demo & Releases
 
 - **Live Demo:** [https://jdrhyne.github.io/volks-typo/](https://jdrhyne.github.io/volks-typo/)
-- **Latest Release:** [v1.0.1](https://github.com/jdrhyne/volks-typo/releases/latest)
+- **Latest Release:** [v1.0.2](https://github.com/jdrhyne/volks-typo/releases/latest)
 - **All Releases:** [View on GitHub](https://github.com/jdrhyne/volks-typo/releases)
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
