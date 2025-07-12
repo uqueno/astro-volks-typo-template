@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2025-07-12
+
+### Fixed
+- Fixed double slash in navigation URLs when using base path ([#5](https://github.com/jdrhyne/volks-typo/issues/5))
+- Fixed static assets 404 errors on Netlify/Vercel deployments ([#6](https://github.com/jdrhyne/volks-typo/issues/6))
+
+### Added
+- Environment-based configuration for deployment flexibility
+- `.env.example` file with deployment configuration examples
+- Enhanced deployment documentation for Netlify, Vercel, and GitHub Pages
+
+### Changed
+- Made `site` and `base` configuration dynamic via environment variables
+- Navigation and asset paths now adapt based on deployment target
+
+## [1.0.1] - 2025-06-10
+
 ### Added
 - Enhanced avatar system with SVG placeholders and realistic headshot appearance
 - Dynamic author information integration in About page
