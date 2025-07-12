@@ -246,24 +246,53 @@ All commands are run from the root of the project:
 
 ## 🚀 Deployment
 
-Volks-Typo generates a static site that can be deployed anywhere:
+Volks-Typo can be deployed to any static hosting service. The theme now supports environment-based configuration for different deployment scenarios.
 
-### Netlify
+### Configuration
+
+The theme uses environment variables to configure the deployment:
+
+1. Copy `.env.example` to `.env`
+2. Set the appropriate values based on your deployment target
+
+### Netlify / Vercel (Root Domain)
 ```bash
+# No configuration needed - works out of the box!
 npm run build
-# Deploy the 'dist' folder
 ```
 
-### Vercel
+Or set environment variables in your deployment platform:
 ```bash
-npm run build
-# Use Vercel CLI or GitHub integration
+SITE=https://your-site.netlify.app
+# Leave BASE_PATH empty for root domain deployments
 ```
 
-### GitHub Pages
-1. Update `astro.config.mjs` with your repository name
-2. Run `npm run build`
-3. Deploy the `dist` folder to GitHub Pages
+### GitHub Pages (Subdirectory)
+```bash
+# Set in .env or as environment variables
+SITE=https://yourusername.github.io
+BASE_PATH=/your-repo-name/
+
+npm run build
+```
+
+### Local Development with Base Path
+```bash
+# Set in .env
+SITE=http://localhost:4321
+BASE_PATH=/volks-typo/
+
+npm run dev
+```
+
+### Build Commands
+```bash
+# Standard build
+npm run build
+
+# Build with custom environment
+SITE=https://example.com BASE_PATH=/blog/ npm run build
+```
 
 ## 📊 Performance
 
