@@ -1,10 +1,15 @@
 ---
 import Layout from '../components/Layout.astro';
+import { calculateReadingTime, extractTextFromMarkdown } from '../utils/reading-time';
 
 const base = import.meta.env.BASE_URL;
 
 const allPosts = await Astro.glob('../content/blog/*.md');
-const sortedPosts = allPosts
+const postsWithReadingTime = allPosts.map(post => ({
+  ...post,
+  readingTime: calculateReadingTime(extractTextFromMarkdown(post.rawContent()))
+}));
+const sortedPosts = postsWithReadingTime
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
@@ -34,6 +39,8 @@ const sortedPosts = allPosts
                   day: 'numeric'
                 })}
               </time>
+              
+              <span class="post-reading-time">{post.readingTime}</span>
               
               {post.frontmatter.categories && (
                 <div class="post-categories">
@@ -148,6 +155,20 @@ const sortedPosts = allPosts
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .post-reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-reading-time::before {
+    content: "•";
+    margin: 0 calc(var(--grid-unit));
+    color: var(--color-border);
   }
 
   .post-categories {

@@ -1,16 +1,22 @@
 ---
 import Layout from '../../components/Layout.astro';
+import { calculateReadingTime, extractTextFromMarkdown } from '../../utils/reading-time';
 
 export async function getStaticPaths() {
   const posts = await Astro.glob('../../content/blog/*.md');
   
-  return posts.map(post => ({
-    params: { slug: post.file.split('/').pop()?.replace('.md', '') },
-    props: { post }
-  }));
+  return posts.map(post => {
+    const plainText = extractTextFromMarkdown(post.rawContent());
+    const readingTime = calculateReadingTime(plainText);
+    
+    return {
+      params: { slug: post.file.split('/').pop()?.replace('.md', '') },
+      props: { post, readingTime }
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, readingTime } = Astro.props;
 const { frontmatter, Content } = post;
 
 const pageTitle = frontmatter.title;
@@ -36,6 +42,8 @@ const publishedTime = frontmatter.date ? new Date(frontmatter.date).toISOString(
             day: 'numeric'
           })}
         </time>
+        
+        <span class="post-reading-time">{readingTime}</span>
         
         {frontmatter.categories && frontmatter.categories.length > 0 && (
           <div class="post-categories">
@@ -113,6 +121,20 @@ const publishedTime = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .post-reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-reading-time::before {
+    content: "•";
+    margin: 0 calc(var(--grid-unit));
+    color: var(--color-border);
   }
 
   .post-categories {
