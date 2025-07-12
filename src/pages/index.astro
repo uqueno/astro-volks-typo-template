@@ -1,10 +1,15 @@
 ---
 import Layout from '../components/Layout.astro';
+import { calculateReadingTime, extractTextFromMarkdown } from '../utils/reading-time';
 
 const mdPosts = await Astro.glob('./blog/*.md');
 const mdxPosts = await Astro.glob('./blog/*.mdx');
 const recentPosts = [...mdPosts, ...mdxPosts];
-const sortedPosts = recentPosts
+const postsWithReadingTime = recentPosts.map(post => ({
+  ...post,
+  readingTime: calculateReadingTime(extractTextFromMarkdown(post.rawContent()))
+}));
+const sortedPosts = postsWithReadingTime
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
   .slice(0, 3);
 ---
@@ -45,13 +50,16 @@ const sortedPosts = recentPosts
                   <a href={post.url}>{post.frontmatter.title}</a>
                 </h3>
                 
-                <time class="demo-post-date" datetime={post.frontmatter.date}>
-                  {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
+                <div class="demo-post-meta">
+                  <time class="demo-post-date" datetime={post.frontmatter.date}>
+                    {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span class="demo-post-reading-time">{post.readingTime}</span>
+                </div>
                 
                 {post.frontmatter.excerpt && (
                   <p class="demo-post-excerpt">{post.frontmatter.excerpt}</p>
@@ -467,14 +475,34 @@ cd volks-typo</code></pre>
     color: var(--color-accent);
   }
 
+  .demo-post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: calc(var(--grid-unit));
+    margin-bottom: calc(var(--grid-unit) * 1.5);
+  }
+
   .demo-post-date {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: calc(var(--grid-unit) * 1.5);
+  }
+
+  .demo-post-reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .demo-post-reading-time::before {
+    content: "•";
+    margin: 0 calc(var(--grid-unit) / 2);
+    color: var(--color-border);
   }
 
   .demo-post-excerpt {

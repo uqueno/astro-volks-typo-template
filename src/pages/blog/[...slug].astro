@@ -2,6 +2,7 @@
 import Layout from '../../components/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import { extractHeadings, filterHeadingsForTOC } from '../../utils/table-of-contents';
+import { calculateReadingTime, extractTextFromMarkdown } from '../../utils/reading-time';
 
 export async function getStaticPaths() {
   // Support both .md and .mdx files
@@ -10,17 +11,19 @@ export async function getStaticPaths() {
   const allPosts = [...mdPosts, ...mdxPosts];
   
   return allPosts.map(post => {
+    const plainText = extractTextFromMarkdown(post.rawContent());
+    const readingTime = calculateReadingTime(plainText);
     const allHeadings = extractHeadings(post.rawContent());
     const tocHeadings = filterHeadingsForTOC(allHeadings);
     
     return {
       params: { slug: post.file.split('/').pop()?.replace(/\.(md|mdx)$/, '') },
-      props: { post, tocHeadings }
+      props: { post, readingTime, tocHeadings }
     };
   });
 }
 
-const { post, tocHeadings } = Astro.props;
+const { post, readingTime, tocHeadings } = Astro.props;
 const { frontmatter, Content } = post;
 
 const pageTitle = frontmatter.title;
@@ -46,6 +49,8 @@ const publishedTime = frontmatter.date ? new Date(frontmatter.date).toISOString(
             day: 'numeric'
           })}
         </time>
+        
+        <span class="post-reading-time">{readingTime}</span>
         
         {frontmatter.categories && frontmatter.categories.length > 0 && (
           <div class="post-categories">
@@ -125,6 +130,20 @@ const publishedTime = frontmatter.date ? new Date(frontmatter.date).toISOString(
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .post-reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-reading-time::before {
+    content: "•";
+    margin: 0 calc(var(--grid-unit));
+    color: var(--color-border);
   }
 
   .post-categories {

@@ -1,12 +1,17 @@
 ---
 import Layout from '../components/Layout.astro';
+import { calculateReadingTime, extractTextFromMarkdown } from '../utils/reading-time';
 
 const base = import.meta.env.BASE_URL;
 
 const mdPosts = await Astro.glob('../content/blog/*.md');
 const mdxPosts = await Astro.glob('../content/blog/*.mdx');
 const allPosts = [...mdPosts, ...mdxPosts];
-const sortedPosts = allPosts
+const postsWithReadingTime = allPosts.map(post => ({
+  ...post,
+  readingTime: calculateReadingTime(extractTextFromMarkdown(post.rawContent()))
+}));
+const sortedPosts = postsWithReadingTime
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
@@ -37,6 +42,8 @@ const sortedPosts = allPosts
                 })}
               </time>
               
+              <span class="post-reading-time">{post.readingTime}</span>
+              
               {post.frontmatter.categories && (
                 <div class="post-categories">
                   {post.frontmatter.categories.map((category) => (
@@ -50,7 +57,7 @@ const sortedPosts = allPosts
               <p class="post-excerpt">{post.frontmatter.excerpt}</p>
             )}
             
-            <a href={`${base}/blog/${post.file.split('/').pop()?.replace('.md', '')}`} class="read-more">Read More →</a>
+            <a href={`${base}/blog/${post.file.split('/').pop()?.replace(/\.(md|mdx)$/, '')}`} class="read-more">Read More →</a>
           </article>
         ))}
       </div>
@@ -150,6 +157,20 @@ const sortedPosts = allPosts
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .post-reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-reading-time::before {
+    content: "•";
+    margin: 0 calc(var(--grid-unit));
+    color: var(--color-border);
   }
 
   .post-categories {
