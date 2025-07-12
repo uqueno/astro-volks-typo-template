@@ -1,0 +1,173 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - link "Volks-Typo":
+    - /url: /
+    - img "Volks-Typo"
+  - navigation "Main navigation":
+    - list:
+      - listitem:
+        - link "Home":
+          - /url: /
+      - listitem:
+        - link "Blog":
+          - /url: /blog
+      - listitem:
+        - link "Categories":
+          - /url: /categories
+      - listitem:
+        - link "About":
+          - /url: /about
+  - link "Star":
+    - /url: https://github.com/jdrhyne2/volks-typo
+  - link "RSS":
+    - /url: /rss.xml
+  - button "Search articles":
+    - img
+- navigation "Mobile navigation":
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem:
+      - link "Blog":
+        - /url: /blog
+    - listitem:
+      - link "Categories":
+        - /url: /categories
+    - listitem:
+      - link "About":
+        - /url: /about
+- main:
+  - complementary:
+    - img
+    - heading "Your Name" [level=3]
+    - paragraph: Writer, designer, and explorer of aesthetic tensions between past and present.
+    - heading "Recent Posts" [level=3]
+    - list:
+      - listitem:
+        - link "The Aesthetic Tension of Modernist Design":
+          - /url: //blog/sample-post
+        - time: Jun 7, 2025
+      - listitem:
+        - 'link "Understanding Bauhaus: Form, Function, and the Modern Web"':
+          - /url: //blog/bauhaus-design-principles
+        - time: Jun 6, 2025
+      - listitem:
+        - link "Building Modernist Layouts with CSS Grid":
+          - /url: //blog/css-grid-modernist-layouts
+        - time: Jun 5, 2025
+      - listitem:
+        - 'link "The Evolution of Typography: From Gutenberg to Google Fonts"':
+          - /url: //blog/evolution-of-typography
+        - time: Jun 4, 2025
+      - listitem:
+        - link "Minimalist Architecture in Digital Design":
+          - /url: //blog/minimalist-architecture-digital-design
+        - time: Jun 3, 2025
+    - heading "Categories" [level=3]
+    - list:
+      - listitem:
+        - link "Design":
+          - /url: //categories/design
+      - listitem:
+        - link "Typography":
+          - /url: //categories/typography
+      - listitem:
+        - link "History":
+          - /url: //categories/history
+      - listitem:
+        - link "Web Development":
+          - /url: //categories/web development
+      - listitem:
+        - link "CSS":
+          - /url: //categories/css
+      - listitem:
+        - link "Architecture":
+          - /url: //categories/architecture
+      - listitem:
+        - link "UI/UX":
+          - /url: //categories/ui/ux
+      - listitem:
+        - link "Color Theory":
+          - /url: //categories/color theory
+  - heading "Blog" [level=1]
+  - paragraph: Exploring design, typography, and the intersection of historical aesthetics with modern functionality.
+  - separator
+  - article:
+    - heading "The Aesthetic Tension of Modernist Design" [level=2]:
+      - link "The Aesthetic Tension of Modernist Design":
+        - /url: //blog/sample-post
+    - time: June 7, 2025
+    - text: Design Typography History
+    - paragraph: An examination of how opposing design philosophies can create compelling visual narratives in contemporary digital spaces.
+    - link "Read More →":
+      - /url: //blog/sample-post
+  - article:
+    - 'heading "Understanding Bauhaus: Form, Function, and the Modern Web" [level=2]':
+      - 'link "Understanding Bauhaus: Form, Function, and the Modern Web"':
+        - /url: //blog/bauhaus-design-principles
+    - time: June 6, 2025
+    - text: Design History Web Development
+    - paragraph: From the workshops of Weimar to the screens of today, the Bauhaus movement's radical approach to design continues to influence how we think about digital spaces.
+    - link "Read More →":
+      - /url: //blog/bauhaus-design-principles
+  - article:
+    - heading "Building Modernist Layouts with CSS Grid" [level=2]:
+      - link "Building Modernist Layouts with CSS Grid":
+        - /url: //blog/css-grid-modernist-layouts
+    - time: June 5, 2025
+    - text: Web Development Design CSS
+    - paragraph: CSS Grid isn't just a layout tool—it's a design philosophy made manifest in code. Learn how to create modernist-inspired layouts that would make Mondrian proud.
+    - link "Read More →":
+      - /url: //blog/css-grid-modernist-layouts
+  - article:
+    - 'heading "The Evolution of Typography: From Gutenberg to Google Fonts" [level=2]':
+      - 'link "The Evolution of Typography: From Gutenberg to Google Fonts"':
+        - /url: //blog/evolution-of-typography
+    - time: June 4, 2025
+    - text: Typography History Design
+    - paragraph: Typography has evolved from hand-carved letters to algorithmic type design. This journey reveals how technological advances have democratized the written word.
+    - link "Read More →":
+      - /url: //blog/evolution-of-typography
+  - article:
+    - heading "Minimalist Architecture in Digital Design" [level=2]:
+      - link "Minimalist Architecture in Digital Design":
+        - /url: //blog/minimalist-architecture-digital-design
+    - time: June 3, 2025
+    - text: Architecture Design UI/UX
+    - paragraph: From Mies van der Rohe's 'Less is more' to modern UI design, minimalist architecture continues to influence how we build digital spaces.
+    - link "Read More →":
+      - /url: //blog/minimalist-architecture-digital-design
+  - article:
+    - heading "Color Theory in Industrial Design" [level=2]:
+      - link "Color Theory in Industrial Design":
+        - /url: //blog/color-theory-industrial-design
+    - time: June 2, 2025
+    - text: Design Color Theory
+    - paragraph: Color in industrial design isn't decoration—it's communication. From safety warnings to brand identity, color choices shape how we interact with objects.
+    - link "Read More →":
+      - /url: //blog/color-theory-industrial-design
+- contentinfo:
+  - paragraph: © 2025 Your Name. All rights reserved.
+  - paragraph:
+    - text: Powered by
+    - link "Astro":
+      - /url: https://astro.build
+    - text: •
+    - link "Volks-Typo Theme":
+      - /url: https://github.com/yourusername/volks-typo
+  - link "GitHub":
+    - /url: https://github.com/yourusername
+    - img
+  - link "Twitter/X":
+    - /url: https://twitter.com/yourusername
+    - img
+  - link "LinkedIn":
+    - /url: https://linkedin.com/in/yourusername
+    - img
+  - link "Email":
+    - /url: mailto:your.email@example.com
+    - img
+```

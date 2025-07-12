@@ -11,7 +11,8 @@
     "check": "astro check",
     "lint": "eslint . --ext .js,.ts,.astro",
     "format": "prettier --write .",
-    "generate-screenshots": "node generate-screenshots.js"
+    "generate-screenshots": "node generate-screenshots.js",
+    "test:features": "playwright test"
   },
   "author": "@jdrhyne",
   "license": "MIT",
@@ -40,11 +41,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.3",
+    "@playwright/test": "^1.54.1",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.0.0",
     "eslint-plugin-astro": "^1.2.0",
-    "playwright": "^1.49.0",
+    "playwright": "^1.54.1",
     "prettier": "^3.3.0",
     "prettier-plugin-astro": "^0.14.0",
     "typescript": "^5.6.0"
