@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Claude conversation logs
+claude-conversations/
+
+# Claude conversation logs
+.claude-conversations/
