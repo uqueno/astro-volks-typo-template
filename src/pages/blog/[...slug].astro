@@ -1,16 +1,23 @@
 ---
 import Layout from '../../components/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { extractHeadings, filterHeadingsForTOC } from '../../utils/table-of-contents';
 
 export async function getStaticPaths() {
   const posts = await Astro.glob('../../content/blog/*.md');
   
-  return posts.map(post => ({
-    params: { slug: post.file.split('/').pop()?.replace('.md', '') },
-    props: { post }
-  }));
+  return posts.map(post => {
+    const allHeadings = extractHeadings(post.rawContent());
+    const tocHeadings = filterHeadingsForTOC(allHeadings);
+    
+    return {
+      params: { slug: post.file.split('/').pop()?.replace('.md', '') },
+      props: { post, tocHeadings }
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, tocHeadings } = Astro.props;
 const { frontmatter, Content } = post;
 
 const pageTitle = frontmatter.title;
@@ -55,6 +62,8 @@ const publishedTime = frontmatter.date ? new Date(frontmatter.date).toISOString(
       <!-- Monumental Blood Red Rule -->
       <hr class="monumental-rule" />
     </header>
+
+    <TableOfContents headings={tocHeadings} />
 
     <div class="post-content">
       <Content />
