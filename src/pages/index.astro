@@ -1,7 +1,9 @@
 ---
 import Layout from '../components/Layout.astro';
 
-const recentPosts = await Astro.glob('./blog/*.md');
+const mdPosts = await Astro.glob('./blog/*.md');
+const mdxPosts = await Astro.glob('./blog/*.mdx');
+const recentPosts = [...mdPosts, ...mdxPosts];
 const sortedPosts = recentPosts
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
   .slice(0, 3);

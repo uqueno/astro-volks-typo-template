@@ -4,14 +4,17 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { extractHeadings, filterHeadingsForTOC } from '../../utils/table-of-contents';
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob('../../content/blog/*.md');
+  // Support both .md and .mdx files
+  const mdPosts = await Astro.glob('../../content/blog/*.md');
+  const mdxPosts = await Astro.glob('../../content/blog/*.mdx');
+  const allPosts = [...mdPosts, ...mdxPosts];
   
-  return posts.map(post => {
+  return allPosts.map(post => {
     const allHeadings = extractHeadings(post.rawContent());
     const tocHeadings = filterHeadingsForTOC(allHeadings);
     
     return {
-      params: { slug: post.file.split('/').pop()?.replace('.md', '') },
+      params: { slug: post.file.split('/').pop()?.replace(/\.(md|mdx)$/, '') },
       props: { post, tocHeadings }
     };
   });

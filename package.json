@@ -32,6 +32,7 @@
     "typography"
   ],
   "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@fontsource/jetbrains-mono": "^5.0.0",
     "@fontsource/oswald": "^5.2.6",
