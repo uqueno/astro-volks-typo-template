@@ -487,6 +487,19 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     color: white;
   }
 
+  /* Dark mode search category styles */
+  :global([data-theme="dark"]) .search-category {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+  }
+
+  :global([data-theme="dark"]) .search-category:hover {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+  }
+
   .search-no-results {
     padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 6);
     text-align: center;
