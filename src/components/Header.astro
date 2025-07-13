@@ -132,8 +132,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   // Search functionality
-  let searchData = [];
-  let searchOverlay, searchInput, searchResults;
+  let searchData: any[] = [];
+  let searchOverlay: HTMLElement | null, searchInput: HTMLInputElement | null, searchResults: HTMLElement | null;
 
   async function initSearch() {
     try {
@@ -144,23 +144,23 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     }
 
     searchOverlay = document.getElementById('search-overlay');
-    searchInput = document.getElementById('search-input');
+    searchInput = document.getElementById('search-input') as HTMLInputElement;
     searchResults = document.getElementById('search-results');
 
     // Event listeners
-    document.getElementById('search-toggle').addEventListener('click', openSearch);
-    document.getElementById('search-close').addEventListener('click', closeSearch);
-    searchInput.addEventListener('input', handleSearch);
+    document.getElementById('search-toggle')?.addEventListener('click', openSearch);
+    document.getElementById('search-close')?.addEventListener('click', closeSearch);
+    searchInput?.addEventListener('input', handleSearch);
     
     // Close on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+      if (e.key === 'Escape' && searchOverlay?.classList.contains('active')) {
         closeSearch();
       }
     });
     
     // Close on overlay click
-    searchOverlay.addEventListener('click', (e) => {
+    searchOverlay?.addEventListener('click', (e: Event) => {
       if (e.target === searchOverlay) {
         closeSearch();
       }
@@ -168,46 +168,49 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   function openSearch() {
-    searchOverlay.classList.add('active');
+    searchOverlay?.classList.add('active');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => searchInput.focus(), 100);
+    setTimeout(() => searchInput?.focus(), 100);
   }
 
   function closeSearch() {
-    searchOverlay.classList.remove('active');
+    searchOverlay?.classList.remove('active');
     document.body.style.overflow = '';
-    searchInput.value = '';
-    searchResults.innerHTML = '';
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '';
   }
 
-  function handleSearch(e) {
-    const query = e.target.value.toLowerCase().trim();
+  function handleSearch(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const query = target.value.toLowerCase().trim();
     
     if (query.length < 2) {
-      searchResults.innerHTML = '';
+      if (searchResults) searchResults.innerHTML = '';
       return;
     }
 
-    const results = searchData.filter(post => 
+    const results = searchData.filter((post: any) => 
       post.title.toLowerCase().includes(query) ||
       post.excerpt.toLowerCase().includes(query) ||
-      (post.categories && post.categories.some(cat => cat.toLowerCase().includes(query)))
+      (post.categories && post.categories.some((cat: string) => cat.toLowerCase().includes(query)))
     ).slice(0, 10);
 
     displayResults(results, query);
   }
 
-  function displayResults(results, query) {
+  function displayResults(results: any[], query: string) {
     if (results.length === 0) {
-      searchResults.innerHTML = `
-        <div class="search-no-results">
-          <p>No articles found for "${query}"</p>
-        </div>
-      `;
+      if (searchResults) {
+        searchResults.innerHTML = `
+          <div class="search-no-results">
+            <p>No articles found for "${query}"</p>
+          </div>
+        `;
+      }
       return;
     }
 
-    const resultsHTML = results.map(post => `
+    const resultsHTML = results.map((post: any) => `
       <article class="search-result">
         <h3 class="search-result-title">
           <a href="${base}${post.url.startsWith('/') ? post.url.slice(1) : post.url}">${post.title}</a>
@@ -220,18 +223,20 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
         ${post.excerpt ? `<p class="search-result-excerpt">${post.excerpt}</p>` : ''}
         ${post.categories ? `
           <div class="search-result-categories">
-            ${post.categories.map(cat => `<span class="search-category">${cat}</span>`).join(' ')}
+            ${post.categories.map((cat: string) => `<span class="search-category">${cat}</span>`).join(' ')}
           </div>
         ` : ''}
       </article>
     `).join('');
 
-    searchResults.innerHTML = `
-      <div class="search-results-header">
-        <p>Found ${results.length} article${results.length === 1 ? '' : 's'} for "${query}"</p>
-      </div>
-      ${resultsHTML}
-    `;
+    if (searchResults) {
+      searchResults.innerHTML = `
+        <div class="search-results-header">
+          <p>Found ${results.length} article${results.length === 1 ? '' : 's'} for "${query}"</p>
+        </div>
+        ${resultsHTML}
+      `;
+    }
   }
 
   // Initialize when DOM is loaded

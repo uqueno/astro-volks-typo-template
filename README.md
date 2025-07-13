@@ -27,14 +27,19 @@ A striking Astro blog theme that explores the aesthetic tension between Bauhaus 
 ## 🌟 Features
 
 ✓ **Unique Design Philosophy** - Bauhaus functionalism meets monumental aesthetics  
+✓ **Dark Mode Toggle** - Seamless theme switching with localStorage persistence  
+✓ **MDX Support** - Full support for both Markdown and MDX content files  
+✓ **Reading Time Display** - Automatic calculation and display of estimated reading time  
+✓ **Table of Contents** - Auto-generated TOC with scroll spy navigation  
 ✓ **Ultra-Minimalist** - Clean, focused design with purposeful use of space  
 ✓ **Responsive Layout** - Mobile-first with elegant desktop sidebar  
-✓ **Lightning Fast** - Zero JavaScript, minimal CSS (~20KB gzipped)  
+✓ **Minimal JavaScript** - Essential JS only for enhanced features, ensuring fast performance  
 ✓ **Full Blog Support** - Categories, tags, archives, and recent posts  
 ✓ **SEO Optimized** - Built-in meta tags and structured data  
 ✓ **Accessibility First** - Semantic HTML and ARIA attributes  
 ✓ **Self-Hosted Fonts** - No external dependencies for privacy  
 ✓ **Type-Safe** - Full TypeScript support  
+✓ **Comprehensive Testing** - Playwright test suite with visual regression testing  
 ✓ **Easy Configuration** - Single config file for all settings  
 
 ![Volks-Typo Desktop View](screenshots/volks-typo-homepage.png)
@@ -43,17 +48,18 @@ A striking Astro blog theme that explores the aesthetic tension between Bauhaus 
 ## 🚀 Demo & Releases
 
 - **Live Demo:** [https://jdrhyne.github.io/volks-typo/](https://jdrhyne.github.io/volks-typo/)
-- **Latest Release:** [v1.0.2](https://github.com/jdrhyne/volks-typo/releases/latest)
+- **Latest Release:** [v1.1.0](https://github.com/jdrhyne/volks-typo/releases/latest)
 - **All Releases:** [View on GitHub](https://github.com/jdrhyne/volks-typo/releases)
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
 ## 💻 Tech Stack
 
-- **Framework:** [Astro](https://astro.build)
+- **Framework:** [Astro](https://astro.build) with MDX integration
 - **Type Checking:** TypeScript
-- **Styling:** Scoped CSS with CSS Variables
+- **Styling:** Scoped CSS with CSS Variables and Dark Mode support
 - **Fonts:** Self-hosted via @fontsource
 - **Icons:** Minimal SVG icons
+- **Testing:** Playwright for browser automation and visual regression testing
 
 ## 🛠️ Quick Start
 
@@ -109,26 +115,40 @@ yarn dev
 volks-typo/
 ├── public/
 │   ├── favicon.svg          # Site favicon
-│   └── site-title.svg       # Fraktur-style site title
+│   ├── site-title.svg       # Fraktur-style site title
+│   └── scripts/
+│       └── theme-init.js    # Dark mode initialization script
 ├── src/
 │   ├── components/
 │   │   ├── Footer.astro     # Site footer with social links
 │   │   ├── Header.astro     # Site header with navigation
 │   │   ├── Layout.astro     # Main layout wrapper
-│   │   └── Sidebar.astro    # Desktop sidebar component
+│   │   ├── Sidebar.astro    # Desktop sidebar component
+│   │   ├── ThemeToggle.astro # Dark mode toggle button
+│   │   └── TableOfContents.astro # Auto-generated TOC component
+│   ├── content/
+│   │   └── blog/            # Blog content directory
+│   │       ├── *.md         # Markdown blog posts
+│   │       └── *.mdx        # MDX blog posts with JSX
 │   ├── pages/
 │   │   ├── index.astro      # Homepage
 │   │   ├── about.astro      # About page
 │   │   ├── blog.astro       # Blog listing page
 │   │   ├── blog/
-│   │   │   ├── [...slug].astro  # Dynamic blog post pages
-│   │   │   └── *.md            # Your blog posts
+│   │   │   └── [...slug].astro  # Dynamic blog post pages
 │   │   ├── categories.astro # Categories listing
 │   │   └── contact.astro    # Contact page
 │   ├── styles/
-│   │   └── global.css       # Global styles and CSS variables
+│   │   └── global.css       # Global styles with dark mode support
+│   ├── utils/
+│   │   ├── reading-time.ts  # Reading time calculation utilities
+│   │   └── table-of-contents.ts # TOC generation utilities
 │   └── config.ts            # Site configuration
-├── astro.config.mjs         # Astro configuration
+├── tests/
+│   ├── features.spec.js     # Playwright feature tests
+│   └── features.spec.js-snapshots/ # Visual regression baselines
+├── astro.config.mjs         # Astro configuration with MDX
+├── playwright.config.js     # Playwright test configuration
 ├── package.json
 └── tsconfig.json           # TypeScript configuration
 ```
@@ -196,11 +216,41 @@ The theme uses a clean, professional monotone palette with strategic red accents
 ![Volks-Typo Blog Page](screenshots/volks-typo-blog.png)
 *Blog listing page with clean typography and organized layout*
 
+## ✨ New Features Usage
+
+### Dark Mode
+The dark mode toggle appears automatically in the header. Users can switch themes, and their preference is saved in localStorage. The theme initializes without FOUC (Flash of Unstyled Content).
+
+### MDX Support  
+Create blog posts using either `.md` or `.mdx` files in `src/content/blog/`. MDX files support all Markdown syntax plus JSX components:
+
+```mdx
+---
+title: "My MDX Post"
+date: "2025-07-12"
+---
+
+# Regular Markdown
+
+<div style={{color: 'red'}}>
+  This is JSX in MDX!
+</div>
+```
+
+### Reading Time
+Reading time is automatically calculated and displayed on blog posts and listings. Based on ~200 words per minute for technical content.
+
+### Table of Contents
+TOC is auto-generated for blog posts with headings (H2-H4). It includes scroll spy functionality to highlight the current section.
+
+### Testing
+Run the comprehensive Playwright test suite with `npm run test:features`. Tests cover dark mode functionality, MDX rendering, reading time display, TOC navigation, and visual regression testing.
+
 ## 📝 Writing Content
 
 ### Blog Posts
 
-Create blog posts as Markdown files in `src/pages/blog/`:
+Create blog posts as Markdown or MDX files in `src/content/blog/`:
 
 ```markdown
 ---
@@ -243,6 +293,7 @@ All commands are run from the root of the project:
 | `npm run astro ...` | Run CLI commands like `astro add` |
 | `npm run check` | Check TypeScript types |
 | `npm run lint` | Run ESLint |
+| `npm run test:features` | Run Playwright feature tests |
 
 ## 🚀 Deployment
 

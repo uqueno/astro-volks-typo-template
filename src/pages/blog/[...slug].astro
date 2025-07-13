@@ -6,14 +6,17 @@ import { calculateReadingTime, extractTextFromMarkdown } from '../../utils/readi
 
 export async function getStaticPaths() {
   // Support both .md and .mdx files
-  const mdPosts = await Astro.glob('../../content/blog/*.md');
-  const mdxPosts = await Astro.glob('../../content/blog/*.mdx');
-  const allPosts = [...mdPosts, ...mdxPosts];
+  const mdPostsGlob = import.meta.glob('../../content/blog/*.md', { eager: true });
+  const mdxPostsGlob = import.meta.glob('../../content/blog/*.mdx', { eager: true });
   
-  return allPosts.map(post => {
-    const plainText = extractTextFromMarkdown(post.rawContent());
+  const allPosts = [...Object.values(mdPostsGlob), ...Object.values(mdxPostsGlob)] as any[];
+  
+  return allPosts.map((post: any) => {
+    // For import.meta.glob, access raw content through compiledContent or body
+    const rawContent = post.body || post.rawContent?.() || '';
+    const plainText = extractTextFromMarkdown(rawContent);
     const readingTime = calculateReadingTime(plainText);
-    const allHeadings = extractHeadings(post.rawContent());
+    const allHeadings = extractHeadings(rawContent);
     const tocHeadings = filterHeadingsForTOC(allHeadings);
     
     return {
@@ -24,7 +27,7 @@ export async function getStaticPaths() {
 }
 
 const { post, readingTime, tocHeadings } = Astro.props;
-const { frontmatter, Content } = post;
+const { frontmatter, Content } = post as any;
 
 const pageTitle = frontmatter.title;
 const base = import.meta.env.BASE_URL;

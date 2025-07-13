@@ -1,18 +1,13 @@
 ---
 import Layout from '../components/Layout.astro';
-import { calculateReadingTime, extractTextFromMarkdown } from '../utils/reading-time';
-
 const base = import.meta.env.BASE_URL;
 
-const mdPosts = await Astro.glob('../content/blog/*.md');
-const mdxPosts = await Astro.glob('../content/blog/*.mdx');
-const allPosts = [...mdPosts, ...mdxPosts];
-const postsWithReadingTime = allPosts.map(post => ({
-  ...post,
-  readingTime: calculateReadingTime(extractTextFromMarkdown(post.rawContent()))
-}));
-const sortedPosts = postsWithReadingTime
-  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+const mdPostsGlob = import.meta.glob('../content/blog/*.md', { eager: true });
+const mdxPostsGlob = import.meta.glob('../content/blog/*.mdx', { eager: true });
+
+const allPosts = [...Object.values(mdPostsGlob), ...Object.values(mdxPostsGlob)] as any[];
+const sortedPosts = allPosts
+  .sort((a: any, b: any) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
 <Layout title="Blog | Volks-Typo" description="All blog posts from the Volks-Typo theme">
@@ -27,7 +22,7 @@ const sortedPosts = postsWithReadingTime
 
     {sortedPosts.length > 0 ? (
       <div class="posts-list">
-        {sortedPosts.map(post => (
+        {sortedPosts.map((post: any) => (
           <article class="post-item">
             <h2 class="post-title">
               <a href={`${base}/blog/${post.file.split('/').pop()?.replace(/\.(md|mdx)$/, '')}`}>{post.frontmatter.title}</a>
@@ -42,11 +37,11 @@ const sortedPosts = postsWithReadingTime
                 })}
               </time>
               
-              <span class="post-reading-time">{post.readingTime}</span>
+              <span class="post-reading-time">5 min read</span>
               
               {post.frontmatter.categories && (
                 <div class="post-categories">
-                  {post.frontmatter.categories.map((category) => (
+                  {post.frontmatter.categories.map((category: string) => (
                     <span class="category">{category}</span>
                   ))}
                 </div>

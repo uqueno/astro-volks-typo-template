@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-07-12
+
+### Added
+- **Dark Mode Toggle**: Complete theme switching system with localStorage persistence and FOUC prevention
+- **MDX Support**: Full integration allowing both .md and .mdx files for blog content with enhanced JavaScript capabilities
+- **Reading Time Calculation**: Automatic reading time estimation displayed on blog posts and listings based on ~200 WPM
+- **Table of Contents**: Auto-generated, scroll-spying TOC component for improved navigation on blog posts
+- **Comprehensive Testing**: Playwright test suite with automated browser testing and visual regression testing
+- **Modern Import System**: Migrated from deprecated Astro.glob() to import.meta.glob() for future compatibility (internal change, no user action required)
+
+### Changed
+- Updated from "Zero JavaScript" to minimal JavaScript for enhanced interactive features
+- Improved content collection handling for better MDX and Markdown integration
+- Enhanced blog post template with TOC integration and reading time display
+
+### Technical Improvements
+- Added @astrojs/mdx integration to astro.config.mjs
+- Created reusable TableOfContents.astro component with IntersectionObserver scroll spy
+- Implemented theme-init.js for flash-of-unstyled-content prevention
+- Added comprehensive Playwright test configuration with cross-browser testing
+- Created utility functions for reading time calculation and heading extraction
+
 ## [1.0.2] - 2025-07-12
 
 ### Fixed
