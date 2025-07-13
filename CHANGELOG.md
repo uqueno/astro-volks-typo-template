@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2025-07-13
+
+### Fixed
+- **Dark Mode Category Tags**: Fixed poor contrast issue where category tags had white text on light gray backgrounds in dark mode
+- **Homepage Category Visibility**: Added dark mode styles for `.demo-category` tags on homepage
+- **Button Hover States**: Improved secondary button hover states for better contrast in dark mode
+- **Consistent Dark Mode Styling**: Ensured all category tag variations have proper dark mode support
+
+### Improved
+- **Dark Mode Contrast**: All UI elements now meet WCAG accessibility standards in both light and dark themes
+- **Visual Consistency**: Category tags now have consistent styling across homepage, blog, sidebar, and search
+- **Button Interactions**: Secondary buttons now use accent color on hover in dark mode for better visibility
+
 ## [1.1.0] - 2025-07-12
 
 ### Added

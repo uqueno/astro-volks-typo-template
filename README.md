@@ -17,8 +17,12 @@ Deploy your own copy of Volks-Typo with these services:
 
 A striking Astro blog theme that explores the aesthetic tension between Bauhaus modernism and WW2-era monumental design. Volks-Typo creates a "dissonant harmony" that is visually compelling, highly functional, and conceptually rich.
 
-![Volks-Typo Featured](screenshots/volks-typo-featured-main.png)
-*Bold, minimalist design with striking typography and professional layout*
+<div align="center">
+  <img src="screenshots/homepage-light.png" width="49%" alt="Volks-Typo Light Mode" />
+  <img src="screenshots/homepage-dark.png" width="49%" alt="Volks-Typo Dark Mode" />
+</div>
+
+*Seamless dark mode support with carefully crafted contrast and visibility*
 
 ## 🎨 Theme by
 
@@ -27,7 +31,7 @@ A striking Astro blog theme that explores the aesthetic tension between Bauhaus 
 ## 🌟 Features
 
 ✓ **Unique Design Philosophy** - Bauhaus functionalism meets monumental aesthetics  
-✓ **Dark Mode Toggle** - Seamless theme switching with localStorage persistence  
+✓ **Dark Mode Toggle** - Seamless theme switching with localStorage persistence and FOUC prevention  
 ✓ **MDX Support** - Full support for both Markdown and MDX content files  
 ✓ **Reading Time Display** - Automatic calculation and display of estimated reading time  
 ✓ **Table of Contents** - Auto-generated TOC with scroll spy navigation  
@@ -42,8 +46,20 @@ A striking Astro blog theme that explores the aesthetic tension between Bauhaus 
 ✓ **Comprehensive Testing** - Playwright test suite with visual regression testing  
 ✓ **Easy Configuration** - Single config file for all settings  
 
-![Volks-Typo Desktop View](screenshots/volks-typo-homepage.png)
-*Homepage layout showcasing the clean design and navigation*  
+## 🌓 Dark Mode Showcase
+
+<div align="center">
+  <img src="screenshots/hero-dark.png" width="100%" alt="Dark Mode Hero Section" />
+</div>
+
+*Professional dark mode with optimized contrast for all UI elements*
+
+<div align="center">
+  <img src="screenshots/categories-comparison-light.png" width="49%" alt="Categories Light Mode" />
+  <img src="screenshots/categories-comparison-dark.png" width="49%" alt="Categories Dark Mode" />
+</div>
+
+*Category tags with perfect visibility in both light and dark themes*  
 
 ## 🚀 Demo & Releases
 
@@ -210,16 +226,32 @@ The theme uses a clean, professional monotone palette with strategic red accents
 - **Grid:** 8-point grid system for consistent spacing
 - **Max Width:** 1200px container for optimal reading
 
-![Volks-Typo Mobile View](screenshots/volks-typo-mobile-home.png)
-*Responsive mobile layout with hamburger navigation*
+### Mobile Experience
 
-![Volks-Typo Blog Page](screenshots/volks-typo-blog.png)
-*Blog listing page with clean typography and organized layout*
+<div align="center">
+  <img src="screenshots/mobile-dark.png" width="300" alt="Mobile Dark Mode" />
+</div>
+
+*Fully responsive design with mobile-optimized dark mode*
 
 ## ✨ New Features Usage
 
 ### Dark Mode
 The dark mode toggle appears automatically in the header. Users can switch themes, and their preference is saved in localStorage. The theme initializes without FOUC (Flash of Unstyled Content).
+
+**Features:**
+- 🌙 One-click theme switching with smooth transitions
+- 💾 Persistent theme preference across sessions
+- 🎨 Carefully optimized contrast for all UI elements
+- 📱 Works seamlessly on all devices
+- ⚡ No flash of unstyled content on page load
+- ♿ Maintains accessibility standards in both themes
+
+<div align="center">
+  <img src="screenshots/blog-dark.png" width="100%" alt="Blog page in dark mode" />
+</div>
+
+*Blog listing with optimized dark mode styling*
 
 ### MDX Support  
 Create blog posts using either `.md` or `.mdx` files in `src/content/blog/`. MDX files support all Markdown syntax plus JSX components:
