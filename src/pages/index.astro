@@ -277,8 +277,34 @@ cd volks-typo</code></pre>
   .btn-secondary:hover,
   .btn-secondary:focus {
     background-color: var(--color-text-primary);
-    color: white;
+    color: var(--color-background);
     transform: translateY(-2px);
+  }
+
+  /* Dark mode button styles */
+  :global([data-theme="dark"]) .btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+  }
+
+  :global([data-theme="dark"]) .btn-primary:hover,
+  :global([data-theme="dark"]) .btn-primary:focus {
+    background-color: transparent;
+    color: var(--color-accent);
+  }
+
+  :global([data-theme="dark"]) .btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+  }
+
+  :global([data-theme="dark"]) .btn-secondary:hover,
+  :global([data-theme="dark"]) .btn-secondary:focus {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
   }
 
   .features {
@@ -521,6 +547,13 @@ cd volks-typo</code></pre>
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-radius: 2px;
+  }
+
+  /* Dark mode demo category styles */
+  :global([data-theme="dark"]) .demo-category {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
   }
 
   .demo-actions {
