@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 2025-08-04
+
+### Fixed
+- **MDX Category Support**: MDX files now properly appear in category listings and sidebar categories
+- **Theme-aware Tag Colors**: Blog post tags now use CSS variables instead of hardcoded colors for proper theme support
+
+### Technical Details
+- Added `.mdx` file support to category page queries alongside existing `.md` support
+- Changed tag text color from hardcoded `white` to `var(--color-surface)` for theme compatibility
+- Updated file extension removal regex to handle both `.md` and `.mdx` extensions in category URLs
+
+### Credits
+Thanks to @cswwww for this contribution!
+
+## [1.1.2] - 2025-07-15
+
+### Fixed
+- **Removed misplaced markdown file** from `src/pages/blog/` directory that was causing the sample blog post to render without layout and styling ([#11](https://github.com/jdrhyne/volks-typo/issues/11))
+- Blog posts now correctly render with the theme's full layout system
+
+### Testing
+- Added automated test to prevent markdown files from being placed in the pages directory
+- Test suite ensures blog posts always render with proper styling
+
+### Credits
+Special thanks to @jdrhyne for reporting this issue with detailed information!
+
 ## [1.1.1] - 2025-07-13
 
 ### Fixed
