@@ -20,17 +20,17 @@ export const config: SiteConfig = {
   title: "Volks-Typo",
   description: "A blog exploring the intersection of design, typography, and history",
   author: {
-    name: "Your Name",
+    name: "Yukio Ueno",
     bio: "Writer, designer, and explorer of aesthetic tensions between past and present.",
     // avatar: "/images/avatar.jpg" // Uncomment and add your avatar image to public/images/
   },
   social: {
-    github: "https://github.com/yourusername",
-    twitter: "https://twitter.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    email: "your.email@example.com"
+    github: "https://github.com/uqueno",
+    twitter: "https://twitter.com/uqueno",
+    linkedin: "https://linkedin.com/in/yukio",
+    email: "info@yukioueno.com"
   },
-  siteUrl: "https://volks-typo.example.com"
+  siteUrl: "https://blog.yukioueno.com"
 };
 
 // Export constants for SEO component
