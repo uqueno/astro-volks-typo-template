@@ -17,8 +17,8 @@ export interface SiteConfig {
 }
 
 export const config: SiteConfig = {
-  title: "Volks-Typo",
-  description: "A blog exploring the intersection of design, typography, and history",
+  title: "Astro Volks Typo Template",
+  description: "Customized version of Astro Volks-Typo theme",
   author: {
     name: "Yukio Ueno",
     bio: "Writer, designer, and explorer of aesthetic tensions between past and present.",
